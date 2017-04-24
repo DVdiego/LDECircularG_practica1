@@ -14,7 +14,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public void insertar(E x) { // insertar al principio LDECircularG hay que corregir
+    public void insertar(E x) {
         NodoLDEC<E> nuevo = new NodoLDEC<E>(x);
         NodoLDEC<E> primero = null;
         if(talla()>0) {
@@ -38,7 +38,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public void insertar(E x, int i) { // Ya modificado para LDECircularG
+    public void insertar(E x, int i) { 
         
         NodoLDEC<E> nuevo = new NodoLDEC<E>(x);
         NodoLDEC<E> ant = null;
@@ -62,7 +62,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public void insertarEnFin(E x) { // Ya modificado para LDECircularG
+    public void insertarEnFin(E x) { 
         NodoLDEC<E> nuevo = new NodoLDEC<E>(x);
         NodoLDEC<E> primero = null;
         if(talla()>0) {
@@ -88,56 +88,71 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public int indiceDe(E x) { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente;
-        int cont = 0;
-        while(aux.dato!=x || aux.siguiente!=ultimo){
-            aux = aux.siguiente;
-            cont++;
-        }
-        if(aux.dato == x) return cont;
-        else return -1;
-    }
-
-    @Override
-    public E recuperar(int i) { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente;
-        if(i>=0&&i<talla()){
-            for (int j=0; j<i; j++){
+    public int indiceDe(E x) { 
+        NodoLDEC<E> aux = null; 
+        if(talla()>0){
+            aux = ultimo.siguiente;
+            int cont = 0;
+            while(aux.dato!=x || aux.siguiente!=ultimo){
                 aux = aux.siguiente;
+                cont++;
             }
-            return aux.dato;
-        } else return null;
+            if(aux.dato == x) return cont;
+            else return -1;
+        }else return -1;
     }
 
     @Override
-    public boolean vaciarLista() { // Ya modificado para LDECircularG
+    public E recuperar(int i) { 
+        NodoLDEC<E> aux = null; 
+        if(talla()>0){
+            aux = ultimo.siguiente;
+            if(i>=0&&i<talla()){
+                for (int j=0; j<i; j++){
+                    aux = aux.siguiente;
+                }
+                return aux.dato;
+            } else return null;
+        }else return null;
+    }
+
+    @Override
+    public boolean vaciarLista() { 
         ultimo = null;
         return true;
     }
 
     @Override
-    public boolean eliminar(E x) { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente; 
-        while(aux != ultimo && !aux.dato.equals(x)) aux = aux.siguiente;
-        NodoLDEC<E> sig = aux.siguiente;
-        NodoLDEC<E> ant = aux.anterior;
-        if(aux==ultimo&&!aux.dato.equals(x)) return false;
-        else{
-            if(aux.dato.equals(x)){// borrar cualquier posición
-                ant.siguiente = sig;
-                sig.anterior = ant;
-                if(aux==ultimo) ultimo = ant; //si el borrado era el ultimo se reasigna
-            } 
-        return true;
-        }
+    public boolean eliminar(E x) { 
+        NodoLDEC<E> aux = null; 
+        if(talla()>0){
+            aux = ultimo.siguiente; 
+            while(aux != ultimo && !aux.dato.equals(x)) aux = aux.siguiente;
+            NodoLDEC<E> sig = aux.siguiente;
+            NodoLDEC<E> ant = aux.anterior;
+            if(aux==ultimo&&!aux.dato.equals(x)) return false;
+            else{
+                if(aux.dato.equals(x)){// borrar cualquier posición
+                    ant.siguiente = sig;
+                    sig.anterior = ant;
+                    if(aux==ultimo) ultimo = ant; //si el borrado era el ultimo se reasigna
+                } 
+            return true;
+            }
+        }else return false;
     }
 
     @Override
-    public boolean eliminar(int i) { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente;
-        NodoLDEC<E> sig = aux.siguiente;
-        NodoLDEC<E> ant = aux.anterior;
+    public boolean eliminar(int i) { 
+        NodoLDEC<E> aux = null;
+        NodoLDEC<E> sig = null;
+        NodoLDEC<E> ant = null;
+        if(talla()>0){
+            aux = ultimo.siguiente;
+            sig = aux.siguiente;
+            ant = aux.anterior;
+        }
+        
         boolean bandera = false; 
         if(talla()==0) return bandera; //si la lista está vacia
         if(talla()==1){
@@ -175,23 +190,26 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public boolean esVacia() { // Ya modificado para LDECircularG
+    public boolean esVacia() {
         if(ultimo == null) return true;
         else return false;
     }
 
     @Override
-    public boolean contiene(E x) { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente;
-        while(aux!=ultimo||!x.equals(aux.dato)){
-            aux = aux.siguiente;
+    public boolean contiene(E x) { 
+        NodoLDEC<E> aux = null;
+        if(talla()>0){
+            aux = ultimo.siguiente;
+            while(aux!=ultimo||!x.equals(aux.dato)){
+                aux = aux.siguiente;
+            }
         }
         if(x.equals(aux.dato)) return true;
         else return false;
     }
 
     @Override
-    public int talla() { // Ya modificado para LDECircularG
+    public int talla() { 
         NodoLDEC<E> aux = ultimo;
         int cont = 0;
         if(!esVacia()){
@@ -205,11 +223,14 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public E[] toArray() { // Ya modificado para LDECircularG
-        NodoLDEC<E> aux = ultimo.siguiente;
+    public E[] toArray() { 
+        NodoLDEC<E> aux = null;
+        if(talla()>0){
+            aux = ultimo.siguiente;
+        }
         E a[] = null;
         int cont = 0;
-        while(aux!=ultimo){
+        while(aux!=ultimo&&aux!=null){
             a[cont] = aux.dato;
             aux = aux.siguiente;
             cont++;
@@ -218,7 +239,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
     
     @Override  
-    public String toString(){ // Ya modificado para LDECircularG
+    public String toString(){ 
         String res = "";
         if(talla()>0){
             NodoLDEC<E> aux = ultimo.siguiente;
@@ -230,7 +251,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         return res;    
     }
        
-    public String toStringRev(){ // Ya modificado para LDECircularG
+    public String toStringRev(){ 
         String res = "";
         if(talla()>0){
             NodoLDEC<E> aux = ultimo.siguiente;
@@ -242,7 +263,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         return res;
     }
     
-    public int contadorNodos(NodoLDEC<E> x, int i){ // Ya modificado para LDECircularG
+    public int contadorNodos(NodoLDEC<E> x, int i){ 
         int cont = i; 
         if(x.siguiente != ultimo.siguiente){
             NodoLDEC<E> aux = x;
@@ -251,7 +272,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         }else return i;
     }
     
-    public void invertirLista(int cont){ // Ya modificado para LDECircularG
+    public void invertirLista(int cont){ 
         if(talla()>0){
             E guarda = recuperar(cont);
             eliminar(cont);
@@ -260,7 +281,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
     }
     
-    public void duplicarNodosPares(){ // Ya modificado para LDECircularG
+    public void duplicarNodosPares(){ 
         int cont = 0;
         if(talla()>0){
             E guarda = recuperar(cont);
@@ -276,7 +297,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
     }
     
-    public void premiarClaves(int x){ // Ya modificado para LDECircularG
+    public void premiarClaves(int x){ 
         int cont = 0;
         if(talla()>0){
             E guarda = recuperar(cont);
