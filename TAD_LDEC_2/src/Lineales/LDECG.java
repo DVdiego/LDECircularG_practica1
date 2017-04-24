@@ -43,7 +43,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         
         if(i == 0) insertar(x); // insertar al principio
         
-        if(i > 0){ // inserción en medio
+        if(i > 0&&i<talla()){ // inserción en medio
             
             for(int j=0;j<=i;j++){
                 aux = aux.siguiente;
@@ -55,7 +55,7 @@ public class LDECG<E> implements ListaDECircular<E> {
             aux.anterior = nuevo; 
         }
         
-        if(i%talla()==2) insertarEnFin(x); //insertar al final
+        if(i==talla()) insertarEnFin(x); //insertar al final
     }
 
     @Override
@@ -96,7 +96,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     @Override
     public E recuperar(int i) { // Ya modificado para LDECircularG
         NodoLDEC<E> aux = ultimo.siguiente;
-        if(i>=0){
+        if(i>=0&&i<talla()){
             for (int j=0; j<i; j++){
                 aux = aux.siguiente;
             }
@@ -111,34 +111,37 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public boolean eliminar(E x) {
+    public boolean eliminar(E x) { // Ya modificado para LDECircularG
         NodoLDEC<E> aux = ultimo.siguiente; 
         while(aux != ultimo && !aux.dato.equals(x)) aux = aux.siguiente;
         NodoLDEC<E> sig = aux.siguiente;
         NodoLDEC<E> ant = aux.anterior;
         if(aux==ultimo&&!aux.dato.equals(x)) return false;
-        
-        if (aux.anterior == ultimo) ultimo = aux.siguiente;
-        else ant.siguiente = aux.siguiente;
-        if(aux.siguiente!=null) sig.anterior = aux.anterior;
+        else{
+            if(aux.dato.equals(x)){// borrar cualquier posición
+                ant.siguiente = sig;
+                sig.anterior = ant;
+                if(aux==ultimo) ultimo = ant; //si el borrado era el ultimo se reasigna
+            } 
         return true;
+        }
     }
 
     @Override
-    public boolean eliminar(int i) {
-        NodoLDEC<E> aux = primero;
+    public boolean eliminar(int i) { // Ya modificado para LDECircularG
+        NodoLDEC<E> aux = ultimo.siguiente;
         NodoLDEC<E> sig = aux.siguiente;
         NodoLDEC<E> ant = aux.anterior;
-        int cont = 0; //->se puede usar una bandera boolean
-        if(talla()==0) return false; //si la lista está vacia
+        boolean bandera = false; //->se puede usar una bandera boolean
+        if(talla()==0) return bandera; //si la lista está vacia
         if(talla()==1){
-            primero = null;
-            cont++;
-        }else if (talla()>1){    
-            if(i == 0){ //borrado al principio
-                sig.anterior = null;
-                primero = aux.siguiente;
-                cont++;
+            ultimo = null;
+            bandera = true;
+        }else if (talla()>1&&i<talla()){    
+            if(i==0){ //borrado al principio
+                ant.siguiente = sig;
+                sig.anterior = ant;
+                bandera = true;
             }
             if(i < talla()-1 && i>0){ // borrado en medio 
                 for(int j = 1;j<=i;j++){
@@ -146,33 +149,35 @@ public class LDECG<E> implements ListaDECircular<E> {
                     ant = aux.anterior;
                     sig = aux.siguiente;
                 }
-                ant.siguiente = aux.siguiente;
-                sig.anterior = aux.anterior;
-                cont++;
+                ant.siguiente = sig;
+                sig.anterior = ant;
+                bandera = true;
             }
             if(i == talla()-1){  //borrado al final 
-                while(aux.siguiente!=null){
+                while(aux!=ultimo){
                     aux = aux.siguiente;
                     ant = aux.anterior;
+                    sig = aux.siguiente;
                 }
-                if(ant!=null) ant.siguiente = null;
-                cont++;
+                ant.siguiente = sig;
+                sig.anterior = ant;
+                ultimo = ant;
+                bandera = true;
             }
         }
-        if(cont>0) return true;
+        return bandera;
+    }
+
+    @Override
+    public boolean esVacia() { // Ya modificado para LDECircularG
+        if(ultimo == null) return true;
         else return false;
     }
 
     @Override
-    public boolean esVacia() { // es lo mismo que talla o casi
-        if(primero == null) return true;
-        else return false;
-    }
-
-    @Override
-    public boolean contiene(E x) {
-        NodoLDEC<E> aux = primero;
-        while(aux.siguiente!=null||!x.equals(aux.dato)){
+    public boolean contiene(E x) { // Ya modificado para LDECircularG
+        NodoLDEC<E> aux = ultimo.siguiente;
+        while(aux!=ultimo||!x.equals(aux.dato)){
             aux = aux.siguiente;
         }
         if(x.equals(aux.dato)) return true;
@@ -180,12 +185,12 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public int talla() {
-        NodoLDEC<E> aux = primero;
+    public int talla() { // Ya modificado para LDECircularG
+        NodoLDEC<E> aux = ultimo.siguiente;
         int cont = 0;
         if(!esVacia()){
             cont++;
-            while(aux.siguiente!=null){
+            while(aux!=ultimo){
                 aux = aux.siguiente;
                 cont++;
             }
@@ -194,13 +199,14 @@ public class LDECG<E> implements ListaDECircular<E> {
     }
 
     @Override
-    public E[] toArray() {
-        NodoLDEC<E> aux = primero;
+    public E[] toArray() { // Ya modificado para LDECircularG
+        NodoLDEC<E> aux = ultimo.siguiente;
         E a[] = null;
         int cont = 0;
-        while(aux.siguiente!=null){
+        while(aux!=ultimo){
             a[cont] = aux.dato;
             aux = aux.siguiente;
+            cont++;
         }
         return a;
     }
