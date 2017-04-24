@@ -43,7 +43,7 @@ public class Operaciones {
     
     
     public void contarNodos(){
-        int i = lista.contadorNodos(lista.getPrimero(),1);
+        int i = lista.contadorNodos(lista.getUltimo(),1);
         System.out.println("\n\tCONTAR NODOS");
         System.out.println("\nLa lista: "+lista.toString()+" tiene "+i+" elementos");
         pausa();
@@ -62,7 +62,7 @@ public class Operaciones {
     }
     
     public void duplicarNodosPares(){
-        System.out.println("/n/tDUPLICAR NODOS PARES");
+        System.out.println("\n\tDUPLICAR NODOS PARES");
         System.out.println("Lista Inicial: "+lista.toString());
         lista.duplicarNodosPares();
         System.out.println("**Lista con duplicados: "+lista.toString());
