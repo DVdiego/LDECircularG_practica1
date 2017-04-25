@@ -237,35 +237,40 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
         return a;
     }
+      
+    public String toString(){
+          if(talla()>0) return toString(ultimo.siguiente, "", talla());
+          else return "";
+    }
     
-    @Override  
-    public String toString(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = aux.dato.toString()+" "+ res;
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;    
-    }
-       
-    public String toStringRev(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = res+" "+aux.dato.toString();
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;
-    }
+    public String toString(NodoLDEC<E> n,String s, int i){
+         NodoLDEC<E> aux = n;  
+         if(i>0){            
+             s = aux.dato.toString()+" "+s;
+             aux = aux.siguiente;           
+             return toString(aux,s,i-1);
+         }
+         else    return s;
+      }
+    
+    public String toStringRev(){
+          if(talla()>0) return toStringRev(ultimo.siguiente,"",talla());
+          else return "";
+      }
+    
+     public String toStringRev(NodoLDEC<E> n,String s, int i){
+         NodoLDEC<E> aux = n;  
+         if(i>0){            
+             s = s+aux.dato.toString()+" ";           
+             aux = aux.siguiente;           
+             return toStringRev(aux,s,i-1);
+         }
+         else    return s;
+      }
     
     public int contadorNodos(NodoLDEC<E> x, int i){ 
         int cont = i; 
-        if(x.siguiente != ultimo.siguiente){
+        if(x.siguiente != ultimo){
             NodoLDEC<E> aux = x;
             aux = aux.siguiente;
             return cont+contadorNodos(aux,cont);
