@@ -1,7 +1,6 @@
 
 package menu;
 
-import java.io.IOException;
 import tareas.Operaciones;
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class TAD_LDEC {
         boolean listaCreada = false;
         
         do{
-            System.out.println("+++++ MENÚ LDE ++++");
+            System.out.println("\t +++++ MENÚ LDE +++++");
             System.out.println("1. Crear lista de claves enteras");
             System.out.println("2. Introducir claves en la lista");
             System.out.println("3. Contar nodos");
@@ -27,17 +26,16 @@ public class TAD_LDEC {
             System.out.println("7. Premiar claves");
             System.out.println("8. Invertir lista");
             System.out.println("0. Salir");
-            System.out.print("Opcion:");
+            System.out.print("Opción:");
             String opcion = entrada.nextLine ();
             
-            if(!listaCreada&&Integer.parseInt(opcion)>1){
+            if(opcion.isEmpty()||opcion.matches(".*[^0-9].*")){
+                System.out.println("\tSeleccionar una opción [0-8]");
+                operacion.pausa();
+            }else if(!listaCreada&&Integer.parseInt(opcion)>1){
                 opcion = "9";
-                System.out.println("¡Primero debe crear la lista!");
-                try {
-                    System.out.println("\nPulse <Intro> para continuar...");
-                    int read = System.in.read();
-                } catch (IOException ex) {}
-                System.out.println("\n");
+                System.out.println("\t¡Primero debe crear la lista!");
+                operacion.pausa();
             }
             
             switch(opcion){

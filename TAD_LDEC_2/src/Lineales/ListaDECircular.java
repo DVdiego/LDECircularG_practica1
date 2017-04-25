@@ -17,13 +17,13 @@ public interface ListaDECircular<E> {
     
     public abstract void insertarEnFin(E x);
     
-    public abstract int indiceDe(E x); //cambiado a E
+    public abstract int indiceDe(E x); 
     
     public abstract E recuperar(int i);
     
     public abstract boolean vaciarLista();
     
-    public abstract boolean eliminar(E x); //cambiado a E
+    public abstract boolean eliminar(E x); 
     
     public abstract boolean eliminar(int i);
     
