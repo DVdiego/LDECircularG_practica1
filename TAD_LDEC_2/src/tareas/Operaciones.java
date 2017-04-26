@@ -2,6 +2,7 @@
 package tareas;
 
 import Lineales.LDECG;
+import excepciones.TADExcepciones;
 import java.io.IOException;
 import java.lang.Integer;
 import java.util.Scanner;
@@ -22,13 +23,24 @@ public class Operaciones {
         boolean bandera = false;
         String delimitadores = "[ .,;?!¡¿\'\"\\[\\]]";
         String claves = "";
+        
         do{
-            System.out.println("\n\tINTRODUCIR CLAVES");
-            System.out.print("Introduzca claves (-1 para terminar):");
-            claves = input.nextLine();
-            bandera = claves.contains("-1");
+            System.out.println("\n\tINTRODUCIR CLAVES");  
+            try{
+                System.out.print("Introduzca claves (-1 para terminar): ");
+                claves = input.nextLine();   
+                if(claves.matches(".*[a-zA-Z].*") ) 
+                    throw new TADExcepciones("->Introduce claves enteras!.");
+                if(!claves.contains("-1")) 
+                    throw new TADExcepciones
+                    ("->Incluye -1 al final para introducirlas en la lista.");
+                    bandera = false;                   
+                }catch(TADExcepciones ex){
+                    System.out.println(ex.getMessage());
+                    bandera = true;
+                }
             
-            }while(bandera==false || claves.matches(".*[a-zA-Z].*"));   
+        }while(bandera);
         
         String[] clavesIndividuales = claves.split(delimitadores);
         for(int i=0;i<clavesIndividuales.length-1;++i){ 
@@ -89,8 +101,12 @@ public class Operaciones {
      */
     public void premiarClaves(){
         System.out.println("\n\tPREMIAR CLAVES\n");
-        System.out.println("Lista inicial: "+lista.toString());
+        String inicial = lista.toString();
+        System.out.println("Lista inicial: "+inicial);
         lista.premiarClaves(lista.talla());
+        if(inicial.equals(lista.toString())) System.out.println
+        ("->No se han premiado claves, ninguna clave coincide con la talla.");
+        else System.out.println("->¡Se han premiado claves!");
         System.out.println("**Lista con duplicados: "+lista.toString());
         pausa();
     }
