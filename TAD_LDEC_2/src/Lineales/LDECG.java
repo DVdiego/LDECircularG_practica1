@@ -427,6 +427,4 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
     }
     
-    
-    
 }
