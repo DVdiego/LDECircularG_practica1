@@ -394,11 +394,10 @@ public class LDECG<E> implements ListaDECircular<E> {
             E guarda = recuperar(cont);
             eliminar(cont);
             duplicarNodosPares();
-            try{ // Excepción por si se intenta usar el metodo con una lista 
-                    //que contenga elementos no enteros
+            try{ 
                 if(Integer.parseInt(guarda.toString())%2==0) insertar(guarda);
             }catch(Exception e){
-                System.out.println("Un elemento no se pudo tratar como entero");
+             System.out.println("->Un elemento no se pudo tratar como entero.");
             }
             insertar(guarda);
         }
@@ -419,10 +418,14 @@ public class LDECG<E> implements ListaDECircular<E> {
             E guarda = recuperar(cont);
             eliminar(cont);
             premiarClaves(x);
-            if(Integer.parseInt(guarda.toString())==x){
-                Integer i = (Integer.parseInt(guarda.toString()))*2;           
-                guarda = (E) i;   
-            }   
+            try{
+                if(Integer.parseInt(guarda.toString())==x){
+                    Integer i = (Integer.parseInt(guarda.toString()))*2;           
+                    guarda = (E) i;   
+                }   
+            }catch(Exception e){
+             System.out.println("->Un elemento no se pudo tratar como entero.");
+            }
             insertar(guarda);
         }
     }
