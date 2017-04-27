@@ -17,7 +17,7 @@ public class TAD_LDEC {
         boolean listaCreada = false;
         
         do{
-            System.out.println("+++++ MENÚ LDE ++++");
+            System.out.println("\t+++++ MENÚ LDEC +++++");
             System.out.println("1. Crear lista de claves enteras");
             System.out.println("2. Introducir claves en la lista");
             System.out.println("3. Contar nodos");
@@ -27,7 +27,7 @@ public class TAD_LDEC {
             System.out.println("7. Premiar claves");
             System.out.println("8. Invertir lista");
             System.out.println("0. Salir");
-            System.out.print("Opcion:");
+            System.out.print("Opcion: ");
             String opcion = entrada.nextLine ();
             
             if(!listaCreada&&Integer.parseInt(opcion)>1){
