@@ -90,7 +90,7 @@ public class Operaciones {
     public void invertirLista(){
         System.out.println("\n\tINVERTIR LISTA\n");
         System.out.println("Lista inicial: "+lista.toString());
-        lista.invertirLista(0);
+        lista.invertirLista();
         System.out.println("Lista invertida: "+lista.toString());
         pausa();
     }
