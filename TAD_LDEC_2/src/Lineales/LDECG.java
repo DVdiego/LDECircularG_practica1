@@ -362,15 +362,53 @@ public class LDECG<E> implements ListaDECircular<E> {
         }else return i;
     }
     
+    
     /**
-     * la funcion invertir lista, nos permite obtener de forma invertida la
+     * la función invertir lista, nos permite obrener de forma invertida la 
+     * lista de forma recursiva.
+     * Para ello, en la fase de desplegado llegamos al final de la lista, y a 
+     * este ultimo nodo le referenciamos como el primero, y en la fase de 
+     * replegado, damos la vuelta a las referencias anterior y siguiente para 
+     * así tener la lista invertida.
+     * @param n
+     * @param aux 
+     */
+    public void invertirLista(){
+        if(ultimo.siguiente!=null){
+            invertirLista(ultimo.siguiente, ultimo.siguiente.siguiente);
+        }
+    }
+    
+    
+    /**
+     * la función invertir lista, nos permite obrener de forma invertida la 
+     * lista de forma recursiva.
+     * Para ello, en la fase de desplegado llegamos al final de la lista, y al 
+     * siguiente, osea el primero, le referenciamos como el último, y en la fase
+     * de replegado, damos la vuelta a las referencias anterior y siguiente para 
+     * así tener la lista invertida.
+     * @param n
+     * @param aux 
+     */
+    protected void invertirLista(NodoLDEC<E> n, NodoLDEC<E> aux){ //no acabada
+        if(aux!=ultimo.siguiente){ 
+            invertirLista(aux, aux.siguiente);
+        } else ultimo = n.siguiente;
+        n.siguiente = n.anterior;
+        n.anterior = aux;
+    }
+    
+    /**
+     * Esta función es la misma función anterior, implementada de otra forma, 
+     * sin tener en cuenta el unico recorrido debido a los metodos.
+     * Nos permite obtener de forma invertida la
      * lista de forma recursiva.
      * Para ello, en la fase de desplegado vamos guardando una copia del primer
      * nodo en una variable que llevamos al stack, y eliminamos este nodo de la
      * lista, hasta alcanzar el caso base(lista vacia), y comienza la fase de 
      * replegado donde añadimos los elementos del stack al final de la lista.
      * @param cont 
-     */
+     */ 
     public void invertirLista(int cont){ 
         if(talla()>0){
             E guarda = recuperar(cont);
