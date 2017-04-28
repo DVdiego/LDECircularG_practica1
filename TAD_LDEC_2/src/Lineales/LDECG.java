@@ -12,13 +12,8 @@ public class LDECG<E > implements ListaDECircular<E> {
     public NodoLDEC<E> getUltimo(){
         return ultimo;
     }
-<<<<<<< HEAD
- 
-    
-=======
 
-  
->>>>>>> origin/develop_P1B
+    
     /**
      * La función insertar nos permite insertar un elemento al principio de la
      * lista enlazada.
@@ -545,38 +540,5 @@ public class LDECG<E > implements ListaDECircular<E> {
     public void premiarClaves(){
         premiarClaves(ultimo.siguiente,0);
     }
-<<<<<<< HEAD
-  
-=======
-    
-    
-    /*
-    @Override  
-    public String toString(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = aux.dato.toString()+" "+ res;
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;    
-    }
-       
-    public String toStringRev(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = res+" "+aux.dato.toString();
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;
 
-    }
-    
-
->>>>>>> origin/develop_P1B
 }
