@@ -1,7 +1,7 @@
 
 package Lineales;
 
-public class LDECG<E> implements ListaDECircular<E> {
+public class LDECG<E > implements ListaDECircular<E> {
     
     protected NodoLDEC<E> ultimo;
     
@@ -12,6 +12,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     public NodoLDEC<E> getUltimo(){
         return ultimo;
     }
+ 
     
     /**
      * La función insertar nos permite insertar un elemento al principio de la
@@ -21,13 +22,26 @@ public class LDECG<E> implements ListaDECircular<E> {
     @Override
     public void insertar(E x) {
         NodoLDEC<E> nuevo = new NodoLDEC<E>(x);
-        NodoLDEC<E> primero = ultimo.siguiente;
-        System.out.println(nuevo.dato.toString());
-        if(primero != null){
-            nuevo.siguiente = primero;
+        NodoLDEC<E> primero = null;
+        
+        if(talla()>0) {
+            primero = ultimo.siguiente;
+        }
+        if(talla() == 1){
+            nuevo.siguiente = ultimo;
+            nuevo.anterior = ultimo;
+            ultimo.anterior = nuevo;
+            ultimo.siguiente = nuevo;
+        } else if(talla()==0){ 
+            ultimo = nuevo;
+            nuevo.siguiente = nuevo;
+            nuevo.anterior = nuevo;
+        } else if(talla()>1){
             primero.anterior = nuevo;
-            primero = nuevo;
-        } else primero = nuevo;
+            nuevo.siguiente = ultimo.siguiente;
+            ultimo.siguiente = nuevo;
+            nuevo.anterior = ultimo;
+        }
     }
     
     
@@ -323,18 +337,17 @@ public class LDECG<E> implements ListaDECircular<E> {
      * valores los va concatenando al inicio de la cadenea durante la fase 
      * de desplegado.
      * @return s Una vez se llegue al caso base retorna la cadena que contiene
-     * todos los valores de los nodos.
+     * todos los valores de los nodos
      */
     public String toString(NodoLDEC<E> n,String s){
          
-        if(n!=ultimo){                             
+        if(n!=ultimo){          
            return toString(n.siguiente,n.dato.toString()+" "+s);
         }
-        else    return s;
+        else    return n.dato.toString()+" "+s;
     }
     
-    
-     
+        
     /**
      * La funcion toStringRev nos permite de forma recursiva obtener la lista 
      * al revés es decir del ultimo al primer nodo como una cadena.
@@ -352,7 +365,7 @@ public class LDECG<E> implements ListaDECircular<E> {
        if(n!=ultimo){                      
           return toStringRev(n.siguiente,s+n.dato.toString()+" ");
        }
-       else    return s;
+       else    return s+n.dato.toString();
     }
     
     
@@ -367,9 +380,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         return toStringRev(ultimo.siguiente,"");
     }
      
-    
-     
-    
+       
     /**
      * La función contar nodos, nos permite obtener recursivamente la talla 
      * de la lista.
@@ -382,7 +393,7 @@ public class LDECG<E> implements ListaDECircular<E> {
     protected int contadorNodos(NodoLDEC<E> x, int i){ 
         if(x != ultimo){          
             return contadorNodos(x.siguiente,i+1);           
-        }else return i;
+        }else return i+1;
     }
     
     
@@ -397,16 +408,12 @@ public class LDECG<E> implements ListaDECircular<E> {
         return contadorNodos(ultimo.siguiente, 0);
     }
      
-    
-    
-
-
-    
+   
     /**
      * La función invertir lista, nos permite obrener de forma invertida la 
      * lista de forma recursiva.
      * Para ello, en la fase de desplegado llegamos al final de la lista, y a 
-     * este ultimo nodo le referenciamos como el primero, y en la fase de 
+     * este ultimo nodo le referenciamos como el ultimo, y en la fase de 
      * replegado, damos la vuelta a las referencias anterior y siguiente para 
      * así tener la lista invertida.
      * @param n Contiene el nodo correspondiente de la lista en cada llamada
@@ -417,15 +424,14 @@ public class LDECG<E> implements ListaDECircular<E> {
      * una vez se llege al caso base.
      */
     protected void invertirLista(NodoLDEC<E> n, NodoLDEC<E> aux){
-        if(aux!=ultimo){      
+        if(aux!=ultimo.siguiente){      
             invertirLista(aux, aux.siguiente);
-        } else ultimo.siguiente = n;
+        } else ultimo = n.siguiente;
         n.siguiente = n.anterior;
         n.anterior = aux;
     }
     
-    
-    
+       
     /**
      * La funcion inverirLista es un metodo lanzadera de inverirLista()
      * recursivo, nos permite invertir el orden de los nodos de la lista.
@@ -433,30 +439,10 @@ public class LDECG<E> implements ListaDECircular<E> {
      */
     public void invertirLista(){
         
-            invertirLista(ultimo.siguiente, ultimo.siguiente.siguiente);
-        
+        invertirLista(ultimo.siguiente, ultimo.siguiente.siguiente);
+       
     }
 
-    
-    
-     /**
-     * Esta función es la misma función anterior, implementada de otra forma, 
-     * sin tener en cuenta el unico recorrido debido a los metodos.
-     * Nos permite obtener de forma invertida la lista de forma recursiva.
-     * Para ello, en la fase de desplegado vamos guardando una copia del primer
-     * nodo en una variable que llevamos al stack, y eliminamos este nodo de la
-     * lista, hasta alcanzar el caso base(lista vacia), y comienza la fase de 
-     * replegado donde añadimos los elementos del stack al final de la lista.
-     * @param cont 
-     */ 
-            /*protected void invertirLista(NodoLDE<E> n){
-                if(n!=null){      
-                    insertar(n.dato);
-                    invertirLista(n.siguiente);  
-                    eliminar(n.dato);
-                }
-            }*/
-    
     
     /**
      * La función duplicarNodosPares, nos permite duplicar los nodos que 
@@ -479,7 +465,7 @@ public class LDECG<E> implements ListaDECircular<E> {
            try{ 
              
                 if(Integer.parseInt(n.dato.toString())%2==0) {
-                    System.out.println("dato: "+n.dato);
+                    
                     NodoLDEC<E> nuevo = new NodoLDEC<E>(n.dato);
                     nuevo.siguiente = n.siguiente;
                     nuevo.anterior = n;
@@ -494,8 +480,7 @@ public class LDECG<E> implements ListaDECircular<E> {
        
     } 
     
-    
-    
+       
     /**
      * La función duplicarNodosPares es metodo lanzadera de duplicarNodosPares
      * recursivo, nos permite duplicar los nodos pares de la lista.
@@ -531,7 +516,6 @@ public class LDECG<E> implements ListaDECircular<E> {
         
         if(n!=ultimo){  
             c = premiarClaves(n.siguiente,c+1 );
-            System.out.println(c);
                 try{
                 if(Integer.parseInt(n.getDato().toString())==c){
                     Integer i = (Integer.parseInt(n.getDato().toString()))*2;           
@@ -541,7 +525,7 @@ public class LDECG<E> implements ListaDECircular<E> {
              System.out.println("->Un elemento no se pudo tratar como entero.");
             }
                 return c;
-        }else  return c;
+        }else  return c+1;
              
     }
     
@@ -555,81 +539,5 @@ public class LDECG<E> implements ListaDECircular<E> {
     public void premiarClaves(){
         premiarClaves(ultimo.siguiente,0);
     }
-    
-    
-    /*
-    @Override  
-    public String toString(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = aux.dato.toString()+" "+ res;
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;    
-    }
-       
-    public String toStringRev(){ 
-        String res = "";
-        if(talla()>0){
-            NodoLDEC<E> aux = ultimo.siguiente;
-            do{  
-                    res = res+" "+aux.dato.toString();
-                    aux = aux.siguiente;
-            }while(aux!=ultimo.siguiente);
-        }
-        return res;
-    }
-    
-    public int contadorNodos(NodoLDEC<E> x, int i){ 
-        int cont = i; 
-        if(x.siguiente != ultimo.siguiente){
-            NodoLDEC<E> aux = x;
-            aux = aux.siguiente;
-            return cont+contadorNodos(aux,cont);
-        }else return i;
-    }
-    
-    public void invertirLista(int cont){ 
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            invertirLista(cont);
-            insertarEnFin(guarda);
-        }
-    }
-    
-    public void duplicarNodosPares(){ 
-        int cont = 0;
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            duplicarNodosPares();
-            try{ 
-                if(Integer.parseInt(guarda.toString())%2==0) insertar(guarda);
-            }catch(Exception e){
-                System.out.println("Un elemento no se pudo tratar como entero");
-            }
-            insertar(guarda);
-        }
-    }
-    
-    public void premiarClaves(int x){ 
-        int cont = 0;
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            premiarClaves(x);
-            if(Integer.parseInt(guarda.toString())==x){
-                Integer i = (Integer.parseInt(guarda.toString()))*2;           
-                guarda = (E) i;   
-            }   
-            insertar(guarda);
-        }
-    }
-    
-    */
-    
+  
 }

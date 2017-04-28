@@ -16,9 +16,10 @@ public class Operaciones {
     public void crearListaClavesEnteras(){ 
         if(lista==null) lista = new LDECG();
         else lista.vaciarLista();
-        System.out.println("\n**LDE vacía creada**");
+        System.out.println("\n**LDEC vacía creada**");
         pausa();
     }
+ 
     
     /**
      * Método introducirClaves pide al usuario introducir las claves por teclado
@@ -56,11 +57,15 @@ public class Operaciones {
         String[] clavesIndividuales = claves.split(delimitadores);
         
         for(int i=0;i<clavesIndividuales.length-1;++i){                    
-            lista.insertar(Integer.parseInt(clavesIndividuales[i]));                  
+            if(Integer.parseInt(clavesIndividuales[i])<0)
+                lista.insertar((Integer.parseInt(clavesIndividuales[i])*-1)); 
+            else 
+                lista.insertar(Integer.parseInt(clavesIndividuales[i]));                  
         }   
         System.out.println("La lista creada es: "+lista.toString());
         pausa();
     }
+
     
     /**
      * Método que muestra por pantalla la lista de claves y la talla del mismo.
@@ -74,6 +79,7 @@ public class Operaciones {
         ("\nLa lista: "+lista.toString()+" tiene "+i+" elementos");
         pausa();
     }
+
     
     /**
      * Método que muestra por pantalla una cadena con la lista de claves.
@@ -113,6 +119,7 @@ public class Operaciones {
         System.out.println("**Lista con duplicados: "+lista.toString());
         pausa();
     }
+
     
     /**
      * Método que muestra por pantalla la lista de claves, llama al método 

@@ -24,8 +24,5 @@ public class NodoLDEC<E> {
     public void setDato(E dato) {
         this.dato = dato;
     }
-    
-    
-    
-    
+      
 }
