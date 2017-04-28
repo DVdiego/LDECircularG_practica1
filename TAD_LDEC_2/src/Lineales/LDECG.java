@@ -12,7 +12,8 @@ public class LDECG<E> implements ListaDECircular<E> {
     public NodoLDEC<E> getUltimo(){
         return ultimo;
     }
-    
+
+  
     /**
      * La función insertar nos permite insertar un elemento al principio de la
      * lista enlazada.
@@ -60,8 +61,8 @@ public class LDECG<E> implements ListaDECircular<E> {
         
         if(i==talla()) insertarEnFin(x); //insertar al final
     }
-    
-    
+
+  
      /**
      * La funcion insertarEnFin, nos permite insertar los elementos al final de
      * la lista.
@@ -92,8 +93,9 @@ public class LDECG<E> implements ListaDECircular<E> {
             ultimo = nuevo;
         }
     }
-    
-    
+
+  
+  
     /**
      * La función indiceDe, nos permite conocer la posición en la lista de cierto
      * objeto si está en la lista.
@@ -116,7 +118,6 @@ public class LDECG<E> implements ListaDECircular<E> {
         }else return -1;
     }
     
-    
     /**
      * La función recuperar, nos permite obtener el elemento que se encuentre en
      * cierta posición de la lista.
@@ -136,8 +137,7 @@ public class LDECG<E> implements ListaDECircular<E> {
             } else return null;
         }else return null;
     }
-    
-    
+
     /**
      * la función vaciarLista, nos permite dejar una lista sin elementos.
      * @return boolean
@@ -173,7 +173,7 @@ public class LDECG<E> implements ListaDECircular<E> {
             }
         }else return false;
     }
-    
+
     
     /**
      * La función eliminar nos permite eliminar el elemento que esté en la
@@ -227,7 +227,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
         return bandera;
     }
-    
+
     
     /**
      * La función esVacia, nos permite conocer si la lista tiene o no algún 
@@ -239,7 +239,8 @@ public class LDECG<E> implements ListaDECircular<E> {
         if(ultimo == null) return true;
         else return false;
     }
-    
+
+  
     
     /**
      * La funcion contiene, nos permite conocer si en la lista se encuentra el
@@ -259,6 +260,7 @@ public class LDECG<E> implements ListaDECircular<E> {
         if(x.equals(aux.dato)) return true;
         else return false;
     }
+
     
     
     /**
@@ -279,8 +281,8 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
         return cont; 
     }
-    
-    
+
+
     /**
      * La funcion toArray, nos permite convertir la lista en un array.
      * @return a array con los elementos de la lista.
@@ -300,8 +302,8 @@ public class LDECG<E> implements ListaDECircular<E> {
         }
         return a;
     }
-    
-    
+
+      
     /**
      * La funcion toString es el metodo lanzadera de toString recursivo, nos
      * permite transformar la lista en un String.
@@ -581,55 +583,8 @@ public class LDECG<E> implements ListaDECircular<E> {
             }while(aux!=ultimo.siguiente);
         }
         return res;
+
     }
     
-    public int contadorNodos(NodoLDEC<E> x, int i){ 
-        int cont = i; 
-        if(x.siguiente != ultimo.siguiente){
-            NodoLDEC<E> aux = x;
-            aux = aux.siguiente;
-            return cont+contadorNodos(aux,cont);
-        }else return i;
-    }
-    
-    public void invertirLista(int cont){ 
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            invertirLista(cont);
-            insertarEnFin(guarda);
-        }
-    }
-    
-    public void duplicarNodosPares(){ 
-        int cont = 0;
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            duplicarNodosPares();
-            try{ 
-                if(Integer.parseInt(guarda.toString())%2==0) insertar(guarda);
-            }catch(Exception e){
-                System.out.println("Un elemento no se pudo tratar como entero");
-            }
-            insertar(guarda);
-        }
-    }
-    
-    public void premiarClaves(int x){ 
-        int cont = 0;
-        if(talla()>0){
-            E guarda = recuperar(cont);
-            eliminar(cont);
-            premiarClaves(x);
-            if(Integer.parseInt(guarda.toString())==x){
-                Integer i = (Integer.parseInt(guarda.toString()))*2;           
-                guarda = (E) i;   
-            }   
-            insertar(guarda);
-        }
-    }
-    
-    */
-    
+
 }

@@ -2,6 +2,7 @@
 package tareas;
 
 import Lineales.LDECG;
+import excepciones.TADExcepciones;
 import java.io.IOException;
 import java.lang.Integer;
 import java.util.Scanner;
@@ -35,6 +36,7 @@ public class Operaciones {
         boolean bandera = false;
         String delimitadores = "[ .,;?!¡¿\'\"\\[\\]]";
         String claves = "";
+        
         do{
             System.out.println("\n\tINTRODUCIR CLAVES");  
             try{
@@ -46,19 +48,20 @@ public class Operaciones {
                     throw new TADExcepciones
                     ("->Incluye -1 al final para introducirlas en la lista.");
                 bandera = false;                   
+
                 }catch(TADExcepciones ex){
                     System.out.println(ex.getMessage());
                     bandera = true;
                 }
             
         }while(bandera);
-           
+
         String[] clavesIndividuales = claves.split(delimitadores);
         
         for(int i=0;i<clavesIndividuales.length-1;++i){                    
             lista.insertar(Integer.parseInt(clavesIndividuales[i]));                  
         }   
-        System.out.println("La lista creada es: "+lista.toString());
+        System.out.println("\tLa lista creada es: "+lista.toString());
         pausa();
     }
     
@@ -129,6 +132,7 @@ public class Operaciones {
         pausa();
     }
     
+
     
     /**
      * Método que muestra por pantalla la lista de claves, llama al método 
@@ -164,8 +168,9 @@ public class Operaciones {
     
      
     /**
-     * Método que nos sirve para realizat la función de pausa.
+     * Método que nos sirve para realizar la función de pausa.
      */ 
+
     public void pausa(){
         try {
            System.out.println("\nPulse <Intro> para continuar...");
