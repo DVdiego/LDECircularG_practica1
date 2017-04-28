@@ -1,16 +1,15 @@
 
 package menu;
 
-import java.io.IOException;
 import tareas.Operaciones;
 import java.util.Scanner;
-
+import excepciones.*;
 
 public class TAD_LDEC {
 
   
     public static void main(String[] args) {
-        // TODO menú para el programa con la utilización del TAD
+
         Scanner entrada = new Scanner (System.in);
         Operaciones operacion = new Operaciones();
         boolean continuar = true;
@@ -28,24 +27,26 @@ public class TAD_LDEC {
             System.out.println("8. Invertir lista");
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
+
             String opcion = entrada.nextLine ();
             
-            if(!listaCreada&&Integer.parseInt(opcion)>1){
-                opcion = "9";
-                System.out.println("¡Primero debe crear la lista!");
-                try {
-                    System.out.println("\nPulse <Intro> para continuar...");
-                    int read = System.in.read();
-                } catch (IOException ex) {}
-                System.out.println("\n");
+            try{
+                if(opcion.isEmpty()||opcion.matches(".*[^0-9].*")) 
+                  throw new TADExcepciones("\t->Seleccionar una opción [0-8].");
+
+                else if(!listaCreada&&Integer.parseInt(opcion)>1){ 
+                  opcion = "9";
+                  throw new TADExcepciones("\t->¡Primero debe crear la lista!");
+                }
+            }catch(TADExcepciones ex){
+                System.out.println(ex.getMessage());
+                operacion.pausa();
             }
             
             switch(opcion){
                 
-                case "1": 
-                    operacion.crearListaClavesEnteras();
-                    listaCreada = true;
-                break;
+                case "1": operacion.crearListaClavesEnteras();
+                          listaCreada = true;break;
             
                 case "2": operacion.introducirClavesLista(); break;
                 
