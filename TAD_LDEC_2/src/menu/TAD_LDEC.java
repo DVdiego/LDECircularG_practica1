@@ -5,9 +5,18 @@ import tareas.Operaciones;
 import java.util.Scanner;
 import excepciones.*;
 
+/**
+ * Clase que nos permite usar el TAD que se ha diseñado para realizar
+ * distintas tareas.
+ */
 public class TAD_LDEC {
 
-  
+    /**
+     * Main muestra por pantalla de forma repetitiva el menú de opciones.
+     * En el metodo se controla que las opciones 2..8 del menú sólo puedan
+     * ser ejecutadas si con anterioridad se ha ejecutado la opción 1.
+     *  
+     */
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner (System.in);

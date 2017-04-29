@@ -1,6 +1,9 @@
 
 package Lineales;
-
+/**
+ * Clase con los atributos necesarios para crear cada nodo de la LDE. 
+ *  
+ */
 public class NodoLDEC<E> {
     
     protected NodoLDEC<E> siguiente;

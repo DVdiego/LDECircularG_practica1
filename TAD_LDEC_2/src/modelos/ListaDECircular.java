@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Lineales;
+
+package modelos;
 
 /**
- *
- * @author Diegojim
- */
+     * Interfaz del TAD, con todos los metodos básicos a implementar. 
+     */
 public interface ListaDECircular<E> {
     
     public abstract void insertar(E x);

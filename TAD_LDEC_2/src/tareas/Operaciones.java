@@ -6,14 +6,23 @@ import excepciones.TADExcepciones;
 import java.io.IOException;
 import java.lang.Integer;
 import java.util.Scanner;
-import excepciones.*;
 
 
+/**
+ * Clase operaciónes que hace uso de los métodos del TAD para
+ * realizar todas sus tareas 
+ */
 public class Operaciones {
     
     Scanner input = new Scanner (System.in); 
     protected LDECG<Integer> lista = null;
     
+     /**
+     * Crea una lista si lista apunta a null, sino vacia la lista actual
+     * mediante el metodo vaciarlista y pone a null la ultima referencia 
+     * a la lista.
+     * @see #crearListaClavesEnteras()  
+     */
     public void crearListaClavesEnteras(){ 
         if(lista==null) lista = new LDECG();
         else lista.vaciarLista();
@@ -30,8 +39,8 @@ public class Operaciones {
      * insertarlas individualmente en la lista de nodos LDEG.
      * En este proceso se controla que solo se adminan enteros y que para
      * terminar de introducir las claves se incluya -1 al final.
-     * @see Lineales.LDEG#toString(); 
-     * @see Lineales.LDEG#insertar();
+     * @see Lineales.LDECG#toString() 
+     * @see Lineales.LDECG#insertar(java.lang.Object) 
      */
     public void introducirClavesLista(){
         boolean bandera = false;
@@ -72,8 +81,8 @@ public class Operaciones {
     
     /**
      * Método que muestra por pantalla la lista de claves y la talla del mismo.
-     * @see Lineales.LDEG#contadorNodos(); 
-     * @see Lineales.LDEG#toString()).
+     * @see Lineales.LDECG#contadorNodos()
+     * @see Lineales.LDECG#toString()
      */
     public void contarNodos(){ 
         int i = lista.contadorNodos();
@@ -86,7 +95,7 @@ public class Operaciones {
     
     /**
      * Método que muestra por pantalla una cadena con la lista de claves.
-     * @see Lineales.LDEG#toString();
+     * @see Lineales.LDECG#toString()
      */
     public void listadoDeClaves(){
         System.out.println("\n\tLISTADO DE CLAVES\n");
@@ -98,7 +107,7 @@ public class Operaciones {
     /**
      * Método que muestra por pantalla una cadena con la lista de claves de 
      * forma invertida.
-     * @see Lineales.LDEG#toStringRev();
+     * @see Lineales.LDECG#toStringRev()
      */
     public void listadoDeClavesRev(){
         System.out.println("\n\tLISTADO DE CLAVES(al revés)\n");
@@ -112,8 +121,8 @@ public class Operaciones {
      * Método que muestra por pantalla la lista de claves, llama al método 
      * duplicarNodosPares para duplicar los nodos pares y muestra la nueva 
      * lista de claves con los nodos pares duplicados.
-     * @see Lineales.LDEG#toString();
-     * @see Lineales.LDEG#duplicarNodosPares() ;
+     * @see Lineales.LDECG#toString()
+     * @see Lineales.LDECG#duplicarNodosPares() 
      */
     public void duplicarNodosPares(){
         System.out.println("\n\tDUPLICAR NODOS PARES");
@@ -128,8 +137,8 @@ public class Operaciones {
      * Método que muestra por pantalla la lista de claves, llama al método 
      * duplicarNodosPares para duplicar los nodos pares y muestra la nueva
      * lista de claves con los nodos en orden invertido respecto a la inicial.
-     * @see Lineales.LDEG#toString();
-     * @see Lineales.LDEG#invertirLista();
+     * @see Lineales.LDECG#toString()
+     * @see Lineales.LDECG#invertirLista()
      */
     public void invertirLista(){
         System.out.println("\n\tINVERTIR LISTA\n");
@@ -149,8 +158,8 @@ public class Operaciones {
      * Tambien nos avisa si se han premiado claves o no, comparando la lista 
      * original almacenada en una cadena y la compara con la cadena de la lista
      * nueva.
-     * @see Lineales.LDEG#toString();
-     * @see Lineales.LDEG#premiarClaves();
+     * @see Lineales.LDECG#toString()
+     * @see Lineales.LDECG#premiarClaves()
      */
     public void premiarClaves(){
         System.out.println("\n\tPREMIAR CLAVES\n");

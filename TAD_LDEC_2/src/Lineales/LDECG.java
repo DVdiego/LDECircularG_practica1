@@ -1,14 +1,29 @@
 
 package Lineales;
 
+import modelos.ListaDECircular;
+/**
+ * Clase Lista Doblemente Enlazada Genérica, implementa todos metodos
+ * de la Interfaz ListaDE.
+ * @param <E> Tipo generico.
+ */
+
 public class LDECG<E > implements ListaDECircular<E> {
     
     protected NodoLDEC<E> ultimo;
     
+    /**
+     * Constructor predeterminado, inicializa ultimo a null.
+     * 
+     */
     public LDECG(){
         this.ultimo = null;
     }
     
+    /**
+     * Retorna ultimo.
+     * @return ultimo que es el nodo anterior al primero de la LDE.
+     */
     public NodoLDEC<E> getUltimo(){
         return ultimo;
     }
@@ -165,7 +180,7 @@ public class LDECG<E > implements ListaDECircular<E> {
     /**
      * La función eliminar, nos permite eliminar un elemento x de la lista.
      * @param x es el dato de tipo E que almacena cada nodo.
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean eliminar(E x) { 
@@ -321,7 +336,7 @@ public class LDECG<E > implements ListaDECircular<E> {
      * La funcion toString es el metodo lanzadera de toString recursivo, nos
      * permite transformar la lista en un String.
      * @return un String de la lista.
-     * @see #toString(Lineales.NodoLDE, java.lang.String) 
+     * @see Lineales.LDECG#toString(Lineales.NodoLDEC, java.lang.String)  
      */
     @Override  
     public String toString(){
@@ -375,7 +390,7 @@ public class LDECG<E > implements ListaDECircular<E> {
      * nos permite transformar la lista en un String pero con los valores de los
      * nodos al revés.
      * @return un String de la lista al réves.
-     * @see #toString(Lineales.NodoLDE, java.lang.String) 
+     * @see Lineales.LDECG#toStringRev(Lineales.NodoLDEC, java.lang.String) 
      */    
     public String toStringRev(){ 
         return toStringRev(ultimo.siguiente,"");
@@ -391,9 +406,9 @@ public class LDECG<E > implements ListaDECircular<E> {
      * @param i Se usa como contador, sumando +1 en la fase de desplegado.
      * @return i Cuando se llega al caso base se retorna i que es la talla.
      */
-    protected int contadorNodos(NodoLDEC<E> x, int i){ 
-        if(x != ultimo){          
-            return contadorNodos(x.siguiente,i+1);           
+    protected int contadorNodos(NodoLDEC<E> n, int i){ 
+        if(n != ultimo){          
+            return contadorNodos(n.siguiente,i+1);           
         }else return i+1;
     }
     
@@ -402,10 +417,9 @@ public class LDECG<E > implements ListaDECircular<E> {
      * La funcion contadorNodos es un metodo lanzadera de contadorNodos 
      * recursivo, nos permite obtener la talla de la lista.
      * @return un String de la lista al réves.
-     * @see #contadorNodos(Lineales.NodoLDE, int) 
+     * @see Lineales.LDECG#contadorNodos(Lineales.NodoLDEC, int)  
      */
-    public int contadorNodos(){   
-        
+    public int contadorNodos(){           
         return contadorNodos(ultimo.siguiente, 0);
     }
      
@@ -436,7 +450,7 @@ public class LDECG<E > implements ListaDECircular<E> {
     /**
      * La funcion inverirLista es un metodo lanzadera de inverirLista()
      * recursivo, nos permite invertir el orden de los nodos de la lista.
-     * @see #invertirLista(Lineales.NodoLDE, Lineales.NodoLDE) 
+     * @see Lineales.LDECG#invertirLista(Lineales.NodoLDEC, Lineales.NodoLDEC) 
      */
     public void invertirLista(){
         
@@ -455,6 +469,8 @@ public class LDECG<E > implements ListaDECircular<E> {
      * que lo sea se duplica el nodo par y se inserta el duplicado entre el
      * nodo par y el nodo siguiente al nodo par modificando las referencias 
      * de los nodos implicados de forma oportuna.
+     * El metodo controla las excepciones que se puedan dar al tratar elementos
+     * que no sean del tipo Integer.
      * @param n, Contiene el nodo correspondiente de la lista en cada llamada
      * recursiva empezando por el nodo primero y terminando con null una vez se
      * llege al caso base.
@@ -485,7 +501,7 @@ public class LDECG<E > implements ListaDECircular<E> {
     /**
      * La función duplicarNodosPares es metodo lanzadera de duplicarNodosPares
      * recursivo, nos permite duplicar los nodos pares de la lista.
-     * @see #duplicarNodosPares(Lineales.NodoLDE) 
+     * @see Lineales.LDECG#duplicarNodosPares(Lineales.NodoLDEC)  
      */
     public void duplicarNodosPares(){
         duplicarNodosPares(ultimo.siguiente);
@@ -507,6 +523,8 @@ public class LDECG<E > implements ListaDECircular<E> {
      * lo sustituimos por este nuevo valor y se vuelve a retornar c de tal forma
      * que conservamos la talla de la lista para seguir comparandolo con cada 
      * nodo hasta terminar la fase de replegado.
+     * El metodo controla las excepciones que se puedan dar al tratar elementos
+     * que no sean del tipo Integer.
      * @param n Contiene el nodo correspondiente de la lista en cada llamada
      * recursiva empezando por el nodo primero y terminando con null una vez se
      * llege al caso base.
@@ -535,7 +553,7 @@ public class LDECG<E > implements ListaDECircular<E> {
      * La función premiarClaves es metodo lanzadera de premiarClaves
      * recursivo, nos permite duplicar el valor del contenido almacenado en 
      * los nodos de la lista que coincidan con  la talla.
-     * @see #premiarClaves(Lineales.NodoLDE, int)  
+     * @see Lineales.LDECG#premiarClaves(Lineales.NodoLDEC, int)   
      */
     public void premiarClaves(){
         premiarClaves(ultimo.siguiente,0);
